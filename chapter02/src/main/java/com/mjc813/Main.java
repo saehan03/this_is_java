@@ -16,5 +16,8 @@ public class Main {
 
         Variable01 var01 = new Variable01();
         var01.howToUseVariable();
+
+        TranslateType translateType = new TranslateType();
+        translateType.useTranslate();
     }
 }
