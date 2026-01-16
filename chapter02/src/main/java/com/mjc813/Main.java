@@ -19,5 +19,20 @@ public class Main {
 
         TranslateType translateType = new TranslateType();
         translateType.useTranslate();
+
+        IntegerType aa = new IntegerType();
+        aa.useInteger();
+
+        CharType bb = new CharType();
+        bb.useChar();
+
+        FDType cc = new FDType();
+        cc.useFloatDouble();
+
+        BooleanType dd = new BooleanType();
+        dd.useBoolean();
+
+        StringType ee = new StringType();
+        ee.useString();
     }
 }
