@@ -25,5 +25,37 @@ public class Main {
 
         Chapter03 cc = new Chapter03();
         cc.Third04();
+
+        EquationEx dd = new EquationEx();
+        System.out.println("2x + 8 = 0 의 해, x는 " + dd.equationFirst(2, 8));
+        System.out.println("5x - 30 = 0 의 해, x는 " + dd.equationFirst(5, -30));
+        System.out.println("7x + 49 = 0 의 해, x는 " + dd.equationFirst(7, 49));
+
+        Chapter03 ff = new Chapter03();
+        ff.practice();
+
+        Chapter03 gg = new Chapter03();
+        gg.Third06();
+
+        Chapter03 hh = new Chapter03();
+        hh.Third07();
+
+        Chapter03 ii = new Chapter03();
+        ii.Third08();
+
+        Chapter03 jj = new Chapter03();
+        jj.Third09();
+
+        Chapter03 kk = new Chapter03();
+        kk.Third09_1();
+
+        Chapter03 ll = new Chapter03();
+        ll.Third10();
+
+        Chapter03 mm = new Chapter03();
+        mm.Third11();
+
+        Chapter04 nn = new Chapter04();
+        nn.Practice();
     }
 }
