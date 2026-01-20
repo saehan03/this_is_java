@@ -1,5 +1,7 @@
 package com.mjc813;
 
+import java.util.Scanner;
+
 public class Chapter04 {
     public void Practice() {
 //        String grade = "B";
@@ -15,14 +17,24 @@ public class Chapter04 {
 //       System.out.println("score1: " + score1);
 //    }
 //
-//        int sum = 0;
-//        for (int i = 1; i <= 100; i++) {
-//            if ( i % 3 == 0) {
-//                sum += i;
+        // 확인문제 3번
+        int i = 1;
+//        for (;;) {
+//            if (i > 100) {
+//                break;
+//            } else if (i % 3 == 0) {
+//                System.out.println("i = " + i);
 //            }
 //        }
-//        System.out.println("1~100까지 정수 중 3의 배수의 총합: " + sum);
 
+        while(i < 100) {
+            if (i % 3 == 0) {
+                System.out.println("while i = " + i);
+            }
+            i++;
+        }
+
+        // 확인문제 4번
 //        int x = 1;
 //        int y = 1;
 //        int num = (int)(Math.random()*6) + 2;
@@ -51,12 +63,41 @@ public class Chapter04 {
 //            }
 //            }
 
+//  확인문제 6번
+//        for (int i = 1; i <= 5; i++) {
+//            for (int j = 1; j <= i; j++) {
+//                System.out.print("*");
+//            }
+//            System.out.println();
+//        }
 
-        for (int i = 1; i <= 5; i++) {
-            for (int j = 1; j <= i; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
-        }
+//  확인문제 7번
+//        Scanner scanner = new Scanner(System.in);
+//        boolean run = true;
+//        int speed = 10000;
+//
+//        while(run) {
+//            System.out.println("--------------------------");
+//            System.out.println("1 . 예금 | 2. 출금 | 3. 잔고 | 4. 종료");
+//            System.out.println("--------------------------");
+//            System.out.println("선택> ");
+//
+//            String strNum = scanner.nextLine();
+//
+//            if(strNum.equals("1")) {
+//                speed++;
+//                System.out.println("예금액> " + speed);
+//            } else if(strNum.equals("2")) {
+//                speed++;
+//                System.out.println("출금액> = " + speed);
+//            } else if(strNum.equals("3")) {
+//                speed--;
+//                System.out.println("잔고> = " + speed);
+//            } else if(strNum.equals("4")) {
+//                run = false;
+//            }
+//        }
+//
+//        System.out.println("프로그램 종료");
     }
-        }
+}
