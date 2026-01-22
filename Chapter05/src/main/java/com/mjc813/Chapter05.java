@@ -396,6 +396,14 @@ public class Chapter05 {
 //        }
     }
 
-    public void 
+    public void testEnum() {
+        Genre gen = Genre.Action;
+        Genre[] genres = new Genre[3];
+
+        System.out.println(gen);
+        for ( Genre g : genres ) {
+            System.out.println(g);
+        }
+    }
 }
 

@@ -73,6 +73,8 @@ public class Main {
         Chapter05 tt = new Chapter05();
         tt.bj02();
 
+        aa.testEnum();
+
 
 
         }
