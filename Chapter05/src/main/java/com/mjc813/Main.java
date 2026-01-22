@@ -67,6 +67,12 @@ public class Main {
         Chapter05 rr = new Chapter05();
         rr.Fifth07_1();
 
+        Chapter05 ss = new Chapter05();
+        ss.bj01();
+
+        Chapter05 tt = new Chapter05();
+        tt.bj02();
+
 
 
         }
