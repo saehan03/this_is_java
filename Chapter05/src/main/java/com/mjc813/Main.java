@@ -73,9 +73,26 @@ public class Main {
         Chapter05 tt = new Chapter05();
         tt.bj02();
 
-        aa.testEnum();
+//        aa.testEnum();
 
 
+        aa.bj01_1();
 
+        aa.bj01_2();
+
+        aa.bj01_3();
+
+        aa.bj01_4();
+
+        Chapter06 zz = new Chapter06();
+        zz.studentSample();
+        zz.koreanSample();
+        zz.car1Example();
+        zz.Car2eaxmple();
+        zz.Car3example();
+        zz.Calculatorexample();
+        zz.Computerexample();
+        zz.Car4example();
+        zz.Calculator2example();
         }
     }

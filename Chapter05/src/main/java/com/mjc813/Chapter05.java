@@ -381,29 +381,51 @@ public class Chapter05 {
         }
     }
 
-    public void bj02() {
+    public void bj01_1() {
 
         int[] intarry = new int[30];
         for (int i = 0; i < intarry.length; i++) {
             System.out.println(i);
             intarry[i] = i;
         }
-
-//
-//        char[] charArry = new char[20];
-//        for (int i = 0; i < charArry.length; i++) {
-
-//        }
     }
 
-    public void testEnum() {
-        Genre gen = Genre.Action;
-        Genre[] genres = new Genre[3];
-
-        System.out.println(gen);
-        for ( Genre g : genres ) {
-            System.out.println(g);
+    public void bj01_2() {
+        char[] charArry = new char[20];
+        for (int i = 0; i < charArry.length; i++) {
+        System.out.println(i + "길이는: " + charArry[i]);
         }
     }
+
+    public void bj01_3() {
+        boolean[][] bArray= new boolean[3][4];
+        for ( int m = 0; m < bArray.length; m++) {
+            for (int n = 0; n < bArray.length; n++) {
+                System.out.println(true);
+            }
+        }
+    }
+
+    public void bj01_4() {
+        String[] sArry = new String[50];
+        for (int p = 0; p < sArry.length; p++) {
+            System.out.println("empty");
+        }
+    }
+
+    public void bj02() {
+
+    }
+
+
+//    public void testEnum() {
+//        Genre gen = Genre.Action;
+//        Genre[] genres = new Genre[3];
+//
+//        System.out.println(gen);
+//        for ( Genre g : genres ) {
+//            System.out.println(g);
+//        }
+//    }
 }
 
