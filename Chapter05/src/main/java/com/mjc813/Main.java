@@ -94,5 +94,6 @@ public class Main {
         zz.Computerexample();
         zz.Car4example();
         zz.Calculator2example();
+        zz.SmartPhone();
         }
     }

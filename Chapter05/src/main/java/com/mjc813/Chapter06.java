@@ -127,4 +127,17 @@ public class Chapter06 {
         System.out.println("정사각형 넓이=" + result1);
         System.out.println("직사각형 넓이=" + result2);
     }
+
+    public void SmartPhone() {
+        SmartPhone myPh = new SmartPhone();
+
+        System.out.println("폰 기종: " + myPh.name);
+        System.out.println("폰 모델: " + myPh.model);
+        System.out.println("폰 색깔: " + myPh.color);
+        System.out.println("메모리 양: " + myPh.memories);
+    }
+
+    public void nintendo() {
+        
+    }
 }
