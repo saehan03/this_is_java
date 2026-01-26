@@ -57,5 +57,45 @@ public class Main {
 
         Chapter04 nn = new Chapter04();
         nn.Practice();
+
+        nn.Forth01();
+
+        nn.Forth01_2();
+
+        nn.Forth01_3();
+
+        nn.Forth01_4();
+
+        nn.Forth02_2();
+
+        nn.SwithEx();
+
+        nn.SwithNoBreakCaseEx();
+
+        nn.SwitchCharEx();
+
+        nn.SwitchExpressionsEx();
+
+        nn.SwitchValueEx();
+
+        nn.PrintFromTo10Ex();
+
+        nn.SumFromTo10Ex();
+
+        nn.FloatCounterEx();
+
+        nn.MultiplicatinTableEx();
+
+        nn.WhilePrintFromTo10Ex();
+
+        nn.SumFrom1To100Ex();
+//
+//        nn.DoWhileEx();
+
+        nn.BreakEx();
+
+        nn.BreakOutterEx();
+
+        nn.ContinueEx();
     }
 }
