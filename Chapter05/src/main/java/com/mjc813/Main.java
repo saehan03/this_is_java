@@ -111,5 +111,8 @@ public class Main {
         zz.EarthExample();
         zz.Car7Eaxmple();
         zz.SingletonExample();
+
+//        zz.CheckQ13();
+        zz.CheckQ16();
         }
     }

@@ -226,5 +226,55 @@ public class Chapter06 {
         }
     }
 
+//    public void CheckQ13() {
+//        Member user1 = new Member("홍길동", "hong", "12345", 20);
+//
+//        String name = "홍길동";
+//        String id = "hong";
+//        String password = " ";
+//        String age = "";
+//
+//        System.out.println(user1.name);
+//        System.out.println(user1.id);
+//        System.out.println(user1.password);
+//        System.out.println(user1.age);
+//
+//        user1.name = " ";
+//        user1.id = " ";
+//        user1.password = "";
+//        user1.age = "";
+///
+//    }
 
+    public void CheckQ15() {
+        MemberService memberService = new MemberService();
+
+        boolean result = memberService.login("hong", "12345");
+        if(result) {
+        System.out.println("로그인 되었습니다.");
+        memberService.logout("hong");
+        } else {
+            System.out.println("id 또는 password가 올바르지 않습니다.");
+        }
+    }
+
+    public void CheckQ16() {
+        Printer print = new Printer();
+//        printer.println(10);
+//        printer.println(true);
+//        printer.println(5.7);
+//        printer.println("홍길동");
+
+        int age = 10;
+        System.out.println(age);
+
+        boolean java = true;
+        System.out.println(java);
+
+        double pi = 5.7;
+        System.out.println(pi);
+
+        String name = "홍길동";
+        System.out.println(name);
+    }
 }
