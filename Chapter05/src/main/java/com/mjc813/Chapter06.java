@@ -138,6 +138,93 @@ public class Chapter06 {
     }
 
     public void nintendo() {
-        
+
     }
+
+    public void Car5Example() {
+        Car5 myCar = new Car5("포르쉐");
+        Car5 yourCar = new Car5("벤츠");
+
+        myCar.run();
+        yourCar.run();
+    }
+
+    public void CalculatorExample3() {
+        double result1 = 10 * 10 * Calculator3.pi;
+        int result2 = Calculator3.plus(10, 5);
+        int result3 = Calculator3.minus(10, 5);
+
+        System.out.println("result1 : " + result1);
+        System.out.println("result2 : " + result2);
+        System.out.println("result3 : " + result3);
+    }
+
+    public void TelevisionExample() {
+        System.out.println(Television.info);
+    }
+
+//    public void Car6() {
+//        int speed;
+//
+//        void run() {
+//            System.out.println(speed + "으로 달립니다.");
+//        }
+//
+//        static void simulate() {
+//            Car6 myCar = new Car6();
+//            myCar.speed = 200;
+//            myCar.run();
+//        }
+//
+//        static void {
+//            simulate();
+//
+//            Car6 myCar = new Car6();
+//            myCar.speed = 60;
+//            myCar.run();
+//        }
+//    }
+
+    public void Korean2Example() {
+        Korean2 k1 = new Korean2("123456-1234567", "감자바");
+
+        System.out.println(k1.nation);
+        System.out.println(k1.ssn);
+        System.out.println(k1.name);
+
+        k1.name = "김자바";
+    }
+
+    public void EarthExample() {
+        System.out.println("지구의 반지름: " + Earth.EARTH_RADIUS + "km");
+        System.out.println("지구의 표면적: " + Earth.EARTH_SURFACE_AREA + "km^2");
+    }
+
+    public void Car7Eaxmple() {
+        Car7 myCar = new Car7();
+
+        myCar.setSpeed(-50);
+        System.out.println("현재 속도: " + myCar.getSpeed());
+
+        myCar.setSpeed(60);
+        System.out.println("현재 속도: " + myCar.getSpeed());
+
+        if(!myCar.isStop()) {
+            myCar.setStop(true);
+        }
+        System.out.println("현재 속도: " + myCar.getSpeed());
+    }
+
+    public void SingletonExample() {
+        Singleton obj1 = Singleton.getInstance();
+        Singleton obj2 = Singleton.getInstance();
+
+        if(obj1 == obj2) {
+            System.out.println("같은 Singleton 객체입니다.");
+        } else {
+            System.out.println("다른 Singleton 객체입니다.");
+        }
+    }
+
+
 }

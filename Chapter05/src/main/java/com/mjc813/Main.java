@@ -84,6 +84,14 @@ public class Main {
 
         aa.bj01_4();
 
+        aa.ArrayCopyExample();
+
+        aa.ArrayCopyEx();
+
+        aa.AdvancedExamle();
+//
+//        aa.MainStringArrayArgument();
+
         Chapter06 zz = new Chapter06();
         zz.studentSample();
         zz.koreanSample();
@@ -95,5 +103,13 @@ public class Main {
         zz.Car4example();
         zz.Calculator2example();
         zz.SmartPhone();
+
+        zz.Car5Example();
+        zz.CalculatorExample3();
+        zz.TelevisionExample();
+        zz.Korean2Example();
+        zz.EarthExample();
+        zz.Car7Eaxmple();
+        zz.SingletonExample();
         }
     }
