@@ -5,7 +5,15 @@ package com.mjc813;
 public class Main {
     public static void main(String[] args) {
 
-        Chapter07 sp = new Chapter07();
-        sp.SmartPhoneEx();
+        Chapter07 aa = new Chapter07();
+        aa.SmartPhoneEx();
+
+        aa.ComputerEx();
+
+        aa.SupersonicAirplaneEx();
+
+        aa.ChildEx();
+
+        aa.achievement();
     }
 }
