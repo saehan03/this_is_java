@@ -14,6 +14,12 @@ public class Main {
 
         aa.ChildEx();
 
-        aa.achievement();
+//        aa.achievement();
+
+        aa.CarEx();
+
+        aa.DriverEx();
+
+//        aa.InstanceofEx();
     }
 }

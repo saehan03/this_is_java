@@ -22,9 +22,9 @@ public class Subject extends Student {
         this.setSubject(getSubject());
     }
 
-    @Override
-    public String getInfo() {
-        return String.format("")
+//    @Override
+//    public String getInfo() {
+//        return String.format("");
     }
 //    public void method1() {
 //        System.out.println("홍길동" + ", 수학");
@@ -33,4 +33,4 @@ public class Subject extends Student {
 //    public void method2() {
 //        System.out.println("김남길" + ", 과학");
 //    }
-}
+

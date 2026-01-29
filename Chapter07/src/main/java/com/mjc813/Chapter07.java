@@ -40,12 +40,60 @@ public class Chapter07 {
         parent.method2();
     }
 
-    public void achievement() {
-        Subject sj = new Subject();
+//    public void achievement() {
+//        Subject sj = new Subject();
+//
+//        Student st = sj;
+//
+//    }
 
-        Student st = sj;
 
-        sj.method1();
-        st.method2();
+    public void CarEx() {
+        Car myCar = new Car();
+
+        myCar.tire = new HankookTire();
+        myCar.run();
+
+        myCar.tire = new Tire();
+        myCar.run();
+
+        myCar.tire = new HankookTire();
+        myCar.run();
+
+        myCar.tire = new KumhoTire();
+        myCar.run();
     }
+
+    public void DriverEx() {
+        Driver driver = new Driver();
+
+        Bus bus = new Bus();
+        driver.drive(bus);
+
+        Taxi taxi = new Taxi();
+        driver.drive(taxi);
+    }
+
+//    public void InstanceofEx() {
+//        public static void personInfo(Person person) {
+//            System.out.println("name: " + person.name);
+//            person.walk();
+//
+//            if (person instanceof Student01 student) {
+//                System.out.println("studentNo: " + student.studentNo);
+//                student.study();
+//            }
+//        }
+//        public static void () {
+//            Person p1 = new Person("홍길동");
+//            personInfo(p1);
+//
+//            System.out.println();
+//
+//            Person p2 = new Student01("김길동", 10);
+//            personInfo(p2);
+//        }
+//    }
+
+
 }

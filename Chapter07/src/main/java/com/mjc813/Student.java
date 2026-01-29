@@ -19,9 +19,9 @@ public class Student {
         this.setScore(90);
     }
 
-    public String getInfo() {
-        return String.format("학생의 성적: ", this.setStudent("홍길동"), this.setSubject("수학"), this.setScore(90));
-    }
+//    public String getInfo() {
+//        return String.format("학생의 성적: ", this.setStudent("홍길동"), this.setSubject("수학"), this.setScore(90));
+//    }
 //
 //    public void method1() {
 //        System.out.println("홍길동");
