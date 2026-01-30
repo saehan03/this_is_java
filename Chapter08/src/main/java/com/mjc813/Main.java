@@ -14,5 +14,21 @@ public class Main {
         aa.RemoteControlEx2();
 
         aa.RemoteControlEx3();
+
+        aa.ServiceEx();
+
+        aa.MultiInterfaceImplEx();
+
+        aa.ExtendsEx();
+
+        aa.CastingEx();
+
+        aa.CarEx();
+
+        aa.DriverEx();
+
+        aa.InstanceofEx();
+
+        aa.SealedEx();
         }
     }
