@@ -30,5 +30,7 @@ public class Main {
         aa.InstanceofEx();
 
         aa.SealedEx();
+
+        aa.Hospital();
         }
     }
