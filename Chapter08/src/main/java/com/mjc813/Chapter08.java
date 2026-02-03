@@ -157,6 +157,5 @@ public class Chapter08 {
         ic.methodC();
     }
 
-    public void Hospital() {
-    }
+
 }
