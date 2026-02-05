@@ -20,6 +20,6 @@ public class MyResource implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        System.out.println();
+        System.out.println("[MyResource(" + name + ") 닫기]");
     }
 }
