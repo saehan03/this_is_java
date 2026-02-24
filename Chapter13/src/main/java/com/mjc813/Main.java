@@ -18,8 +18,6 @@ public class Main {
 
         nintendoList.set(1, new NintendoGame("젤다 왕눈", Grade.TWELVE, 79800));
 
-//        nintendoList.remove(2);
-        
         System.out.println("\n전체 목록 JSON:");
         System.out.println(nintendoList.getJsonAllItems());
     }
