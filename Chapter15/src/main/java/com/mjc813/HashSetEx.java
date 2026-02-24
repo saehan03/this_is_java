@@ -6,10 +6,10 @@ public class HashSetEx {
     public static void main(String[] args) {
         Set<String> set = new HashSet<String>();
 
+//        Set<Member> set = new HashSet<Member>();
         set.add("Java");
         set.add("JDBC");
         set.add("JSP");
-        set.add("Java");
         set.add("Spring");
 
 //        set.add(new Member("홍길동", 30));
