@@ -2,6 +2,6 @@ package com.mjc813.crud;
 
 public enum Grade {
     ALL,
-    TWELVE,
-    ADULT,
+    AGE12_OVER,
+    AGE15_OVER,
 }
