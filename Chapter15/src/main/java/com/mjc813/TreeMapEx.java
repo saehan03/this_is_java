@@ -34,6 +34,16 @@ public class TreeMapEx {
 
         NavigableMap<String,Integer> descendingMap = treeMap.descendingMap();
         Set<Entry<String,Integer>> descendingEntrySet = descendingMap.entrySet();
-        
+
+        for(Entry<String,Integer> e : descendingEntrySet) {
+            System.out.println(e.getKey() + "-" + e.getValue());
+        }
+        System.out.println();
+
+        System.out.println("[c~h 사이의 단어 검색]");
+        NavigableMap<String,Integer> rangeMap = treeMap.subMap("c", true, "h", false);
+        for(Entry<String, Integer> e : rangeMap.entrySet()) {
+            System.out.println(e.getKey() + "-" + e.getValue());
+        }
     }
 }
