@@ -4,32 +4,42 @@ import java.util.*;
 
 public class HashSetEx {
     public static void main(String[] args) {
-        Set<String> set = new HashSet<String>();
+        Set<Student> set = new HashSet<Student>();
+
+        set.add(new Student(1, "홍길동"));
+        set.add(new Student(2, "신용권"));
+        set.add(new Student(1, "조민우"));
+
+        System.out.println("저장된 객체 수: " + set.size());
+        for(Student s : set) {
+            System.out.println(s.studentNum + ":" + s.name);
+        }
+//        Set<String> set = new HashSet<String>();
 
 //        Set<Member> set = new HashSet<Member>();
-        set.add("Java");
-        set.add("JDBC");
-        set.add("JSP");
-        set.add("Spring");
+//        set.add("Java");
+//        set.add("JDBC");
+//        set.add("JSP");
+//        set.add("Spring");
 
 //        set.add(new Member("홍길동", 30));
 //        set.add(new Member("홍길동", 30));
 
-        Iterator<String> iterator = set.iterator();
-        while(iterator.hasNext()) {
-            String element = iterator.next();
-            System.out.println(element);
-            if(element.equals("JSP")) {
-                iterator.remove();
-            }
-        }
-        System.out.println();
-
-        set.remove("JDBC");
-
-        for(String element : set) {
-            System.out.println(element);
-        }
+//        Iterator<String> iterator = set.iterator();
+//        while(iterator.hasNext()) {
+//            String element = iterator.next();
+//            System.out.println(element);
+//            if(element.equals("JSP")) {
+//                iterator.remove();
+//            }
+//        }
+//        System.out.println();
+//
+//        set.remove("JDBC");
+//
+//        for(String element : set) {
+//            System.out.println(element);
+//        }
 
 //        int size = set.size();
 //        System.out.println("총 객체 수: " + set.size());
