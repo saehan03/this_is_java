@@ -10,18 +10,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-public class ServerMain extends Thread {
+public class ServerMain extends Thread implements ServerChatInterface {
+    public static final String exitWord = "(3{}#quit~%#!#)(";
+    public static final int port = 50813;
     private Map<Long, ChatRoom> chatRooms;
     private ServerSocket serverSocket;
-    private Set<ChatUser> lobby;
+    private Set<ServerChatSocket> lobby;
 
     public ServerMain() {
         this.chatRooms = Collections.synchronizedMap(new HashMap<Long, ChatRoom>());
-        this.lobby = Collections.synchronizedSet(new HashSet<ChatUser>());
+        this.lobby = Collections.synchronizedSet(new HashSet<ServerChatSocket>());
         try {
-            this.serverSocket = new ServerSocket(50813);
+            this.serverSocket = new ServerSocket(port);
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -34,25 +36,39 @@ public class ServerMain extends Thread {
                 }
                 Socket socket = this.serverSocket.accept();
 
-                BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                String userName = br.readLine();
-                ChatUser cu = new ChatUser(userName, socket);
-                this.lobby.add(cu);
-                try {
-                    br.close();
-                } catch (IOException ie) {
-                }
+                ChatUser cu = new ChatUser(socket.getInetAddress().getHostAddress(), socket);
+
+                ServerChatSocket scs = new ServerChatSocket(cu, this.lobby);
+                scs.start();
+
+                this.lobby.add(scs); // 접속한 사용자는 모두 로비에 추가했다.
+                this.printLobby();
+
             } catch (IOException e) {
             }
-            ServerChatSocket scs = new ServerChatSocket(cu);
-            scs.start();
-        } catch (Exception ex) {
-            
         }
     }
 
+    private void printLobby() {
+        for ( ServerChatSocket scs : this.lobby ) {
+            System.out.println(scs.getChatUser());
+        }
+    }
+
+    @Override
+    public void removeChatUser(ServerChatSocket scs) {
+        this.lobby.remove(scs);
+    }
+
+    @Override
+    public void sendAllClients(String msg) {
+        for ( ServerChatSocket scs : this.lobby ) {
+            scs.send(msg);
+        }
+    }
 
     public static void main(String[] args) {
         ServerMain sm = new ServerMain();
+        sm.start();
     }
 }

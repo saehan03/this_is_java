@@ -6,12 +6,12 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientMain extends Thread {
+public class ClientMain2 extends Thread {
     private Socket socket;
     private BufferedReader br;
     private BufferedWriter bw;
 
-    public ClientMain(String ip) {
+    public ClientMain2(String ip) {
         try {
             this.socket = new Socket(ip, ServerMain.port);
             this.br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
@@ -60,10 +60,7 @@ public class ClientMain extends Thread {
         } catch (Exception ex) {
             System.out.println("서버 접속이 끊겼습니다.");
         } finally {
-            try {
-                bw.close();
-            } catch (Exception e) {
-            }
+            this.close();
             try {
                 scanner.close();
             } catch (Exception e) {
@@ -74,7 +71,6 @@ public class ClientMain extends Thread {
 
     @Override
     public void run() {
-        BufferedReader br = null;
         try {
             while(true) {
                 String msg = this.br.readLine();
@@ -94,7 +90,7 @@ public class ClientMain extends Thread {
             return;
         }
         try {
-            ClientMain cm = new ClientMain(args[0]);
+            ClientMain2 cm = new ClientMain2(args[0]);
             cm.start();
             cm.doChat();
         } catch (Throwable ex) {
