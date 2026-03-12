@@ -4,17 +4,17 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class ClientApp2 {
+public class ClientApp {
     private Socket socket;
 
-    public ClientApp2() throws IOException {
+    public ClientApp() throws IOException {
         this.socket = new Socket(); //클라이언트의 통신용 소켓 생성
         // ip 와 포트 정보를 bind
     }
 
     public void connect() throws IOException {
 //        this.socket.bind(new InetSocketAddress("localhost", 59999)); // ip 와 포트 정보를 bind 하고 접속 시도한다.
-        this.socket.connect(new InetSocketAddress("localhost", 59999));
+        this.socket.connect(new InetSocketAddress("localhost", 59998));
         // 해당 up와 포트로 접속을 시도한다.
     }
 
@@ -52,7 +52,7 @@ public class ClientApp2 {
 
     public static void main(String[] args) {
         try {
-            ClientApp2 ca = new ClientApp2();
+            ClientApp ca = new ClientApp();
             ca.connect();
 
             String msg = ca.read();
