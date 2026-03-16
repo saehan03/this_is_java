@@ -14,7 +14,7 @@ public class Report4Plus extends Thread {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 if (running) {
-                    System.out.print(targetChar);
+                    System.out.println(targetChar);
                 }
                 Thread.sleep(300);
             }

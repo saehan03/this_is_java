@@ -1,24 +1,17 @@
 package com.mjc813.report5;
 
-public class Report5Sort extends Thread{
-    private volatile char targetChar;
-    private volatile boolean running = false;
+import java.util.List;
 
-    public void setTargetChar(char c) {
-        this.targetChar = c;
-        this.running = true;
+public class Report5Sort implements Runnable {
+    private List<Integer> list;
+    public Report5Sort(List<Integer> list){
+        this.list = list;
     }
 
     @Override
     public void run() {
-        try {
-            while (!Thread.currentThread().isInterrupted()) {
-                if (running) {
-                    System.out.print(targetChar);
-                }
-                Thread.sleep(300);
-            }
-        } catch (InterruptedException e) {
-        }
+        this.list.stream().sorted().forEach((x) -> {
+            System.out.println("Report5Sort : " + x );
+        });
     }
 }
