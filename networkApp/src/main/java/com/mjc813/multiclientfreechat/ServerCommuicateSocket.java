@@ -1,4 +1,4 @@
-package com.mjc813.onebyonefreechat;
+package com.mjc813.multiclientfreechat;
 
 import java.io.*;
 import java.net.Socket;
@@ -7,11 +7,13 @@ public class ServerCommuicateSocket extends Thread {
     private Socket socket;
     private DataInputStream dis;
     private DataOutputStream dos;
+    private ServerNetworkInterface sni;
 
-    public  ServerCommuicateSocket(Socket socket) throws IOException {
+    public  ServerCommuicateSocket(Socket socket, ServerNetworkInterface sni) throws IOException {
         this.socket = socket;
         this.dis = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
         this.dos = new DataOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+        this.sni = sni;
     }
 
     public void send(String msg) throws IOException {
@@ -40,20 +42,20 @@ public class ServerCommuicateSocket extends Thread {
             this.socket.close();
         } catch (Exception e) {
         }
-//        try {
-//            this.scs.close();
-//        } catch (Exception e) {
-//        }
     }
+
     @Override
     public void run() {
         try {
             while (true) {
                 String msg = this.read();
-                System.out.println("From Client : " + msg );
+//				System.out.println("From Client : " + msg );
+                this.sni.sendAllClients(msg);
             }
         } catch (Exception e) {
             System.out.println("Client 접속 끊김");
         }
+        this.close();
+        this.sni.deleteClient(this);
     }
 }
