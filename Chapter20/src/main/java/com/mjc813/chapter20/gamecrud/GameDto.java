@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class GameDto {
-    private Integer id;
+//    private Integer id;
     private String name;
     private String genre;
     private String grade;
