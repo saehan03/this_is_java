@@ -7,7 +7,7 @@ spring:
     username: beginner_user
     password: beginer1234@
 
-service:
+server:
   servlet:
     encoding:
       charset: UTF-8
