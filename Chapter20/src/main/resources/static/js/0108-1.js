@@ -153,13 +153,13 @@ class NintendoGame {
    	})
    	.done(function(data, textStatus, jqXHR) {
    	    // 요청 성공 시 실행
-   	    console.log("성공:", data);
+   	    alert("성공:", data);
    //	    $("#result").text(data.message);
-           this.clearInputBox();
+     clearInputBox();
    	})
    	.fail(function(jqXHR, textStatus, errorThrown) {
    	    // 요청 실패 시 실행
-   	    console.error("실패:", textStatus);
+   	    alert("실패:", textStatus);
    	})
    	.always(function() {
    	    // 성공/실패 관계없이 항상 실행
@@ -176,7 +176,40 @@ class NintendoGame {
     // gameList 배열에서 JS객체.id 번호랑 같은 원소를 찾는다. let 찾는객체 = this.#gameList.find(() => {});
     // JS객체를 찾는객체로 바꿔치기 한다.
     // gameList 배열정보를 게임목록 화면에 출력한다. this.printList();
-  }
+    let gameData = {
+          id: $("#id").val()
+          , name: $("#name").val()
+          , genre: $("#genre").val()
+          , grade: $("#grade").val()
+          , price: $("#price").val() * 1
+          , imgUrl: $("#imgUrl").val()
+        };
+        this.updateData(gameData);
+      }
+
+   updateData(gameData) {
+    	$.ajax({
+    	    url: "/api/update-data" // 요청 URL
+    	    , type: "PATCH"          // 전송 방식 (GET, POST 등)
+    	    , dataType: "json"      // 응답 데이터 타입
+    	    , data: JSON.stringify(gameData)
+    	    , contentType: "application/json"
+    	})
+    	.done(function(data, textStatus, jqXHR) {
+    	 // 요청 성공 시 실행
+    	alert("성공:", data);
+   //	$("#result").text(data.message);
+    	  clearInputBox();
+          	})
+          	.fail(function(jqXHR, textStatus, errorThrown) {
+          	// 요청 실패 시 실행
+          	alert("실패:", textStatus);
+          })
+              	.always(function() {
+          // 성공/실패 관계없이 항상 실행
+          // console.log("요청 완료");
+    	 	});
+         }
 
   deleteGame() {
     // 사용자 입력 데이터가 유효한지 검증해야 한다. 유효하지 않으면 경고창 띄우고 리턴;
