@@ -1,15 +1,43 @@
 class NintendoGame {
-  #gameList = [
-    {id:1, name:"마리오 골프", genre:"S", grade:"ALL", price:20000, imgUrl:"https://pimg.mk.co.kr/news/cms/202504/06/news-p.v1.20250404.ad221f845db2489a86c2ff50f32c53fa_P1.png"},
-    {id:2, name:"젤다의 전설", genre:"R", grade:"ALL", price:30000, imgUrl:"https://store.nintendo.co.kr/media/catalog/product/cache/3be328691086628caca32d01ffcc430a/f/i/file.jpg"},
-  ];
+//  #gameList = [
+//    {id:1, name:"마리오 골프", genre:"S", grade:"ALL", price:20000, imgUrl:"https://pimg.mk.co.kr/news/cms/202504/06/news-p.v1.20250404.ad221f845db2489a86c2ff50f32c53fa_P1.png"},
+//    {id:2, name:"젤다의 전설", genre:"R", grade:"ALL", price:30000, imgUrl:"https://store.nintendo.co.kr/media/catalog/product/cache/3be328691086628caca32d01ffcc430a/f/i/file.jpg"},
+//  ];
 
-  printList() {
+   printList(resultList) {
     $(".listDataBlock").empty();
     this.#gameList.forEach((item) => {
       // 배열을 순환하면서 item 을 class="frame-2" 태그 안의 자식 태그로 추가한다.
       $(".listDataBlock").append(this.printRow(item));
     });
+  }
+
+searchList() {
+//    let searchData = {
+//        "searchName" : $("#searchName").val()
+//        , "searchGrade" : $("searchGrade").val()
+//    };
+	let searchName = $("#searchName").val();
+	let searchGrade = $("#searchGrade").val();
+    let that = this; // this를 that에 저장
+	$.ajax({
+	    //	    url: "/api/search-list?searchName=" + searchName + "&searchGrade=" + searchGrade // 요청 URL
+        	    url: `/api/search-list?searchName=${searchName}&searchGrade=${searchGrade}` // 요청 URL
+	    , type: "GET"          // 전송 방식 (GET, POST 등)
+	})
+	.done(function(data, textStatus, jqXHR) {
+	    // 요청 성공 시 실행
+//	    alert("성공:", data);
+	    that.printList(data.resultData);
+	})
+	.fail(function(jqXHR, textStatus, errorThrown) {
+	    // 요청 실패 시 실행
+	    alert("실패:", textStatus);
+	})
+	.always(function() {
+	    // 성공/실패 관계없이 항상 실행
+//	    console.log("요청 완료");
+	});
   }
 
   printGenre(genre) {
@@ -116,13 +144,13 @@ class NintendoGame {
     if ( !this.checkInputData("add") ) {
       return;
     }
-    let maxId = this.#gameList.reduce((result, item) => {
-      return result < item.id ? item.id : result;
-    }, 0) + 1;
+//    let maxId = this.#gameList.reduce((result, item) => {
+//      return result < item.id ? item.id : result;
+//    }, 0) + 1;
     // 새로운 데이터는 id:고유번호 가 필요하다. 그러므로 배열 전체 원소의 id의 최대값 에 +1 한 값을 고유한번호로 가져야한다.
     // 입력데이터는 JS 객체로 만든다. let JS객체 = {id:고유번호, name:$("#name").val(), genre:"S", grade:"ALL", price:금액, imgUrl:"http://..."};
     let newGame = {
-      id: maxId
+      id: 0 // maxId
       , name: $("#name").val()
       , genre: $("#genre").val()
       , grade: $("#grade").val()
@@ -134,7 +162,7 @@ class NintendoGame {
     this.insertData(newGame);
 //    this.clearInputBox();
     // gameList 배열정보를 게임목록 화면에 출력한다. this.printList();
-    this.printList();
+    this.searchList();
   }
 
   insertData(data) {
@@ -144,6 +172,7 @@ class NintendoGame {
     // 4. Data Service 는 insert 하는 mybatis insert 메소드를 실행해야 한다.
     // 5. mybatis insert 메소드는 SQL INSERT query 를 데이터베이스 연결한 컨넥션풀에서 실행해야 한다.
     // 6. 실행할 결과를 역순으로 화면까지 리턴해야한다.
+    let that = this; // this를 that에 저장
    	$.ajax({
    	    url: "/api/insert-data" // 요청 URL
    	    , type: "POST"          // 전송 방식 (GET, POST 등)
@@ -155,7 +184,8 @@ class NintendoGame {
    	    // 요청 성공 시 실행
    	    alert("성공:", data);
    //	    $("#result").text(data.message);
-     clearInputBox();
+     that.clearInputBox();   // $.ajax 함수안에서 this 는 jquery 객체자신이므로 that 을 사용
+     that.searchList();  // 목록을 새로 고침
    	})
    	.fail(function(jqXHR, textStatus, errorThrown) {
    	    // 요청 실패 시 실행
@@ -188,6 +218,7 @@ class NintendoGame {
       }
 
    updateData(gameData) {
+    let that = this; // this를 that에 저장
     	$.ajax({
     	    url: "/api/update-data" // 요청 URL
     	    , type: "PATCH"          // 전송 방식 (GET, POST 등)
@@ -199,7 +230,8 @@ class NintendoGame {
     	 // 요청 성공 시 실행
     	alert("성공:", data);
    //	$("#result").text(data.message);
-    	  clearInputBox();
+    	  that.clearInputBox();   // $.ajax 함수안에서 this 는 jquery 객체자신이므로 that 을 사용
+    	  that.searchList();  // 목록을 새로 고침
           	})
           	.fail(function(jqXHR, textStatus, errorThrown) {
           	// 요청 실패 시 실행
@@ -219,27 +251,81 @@ class NintendoGame {
     // gameList 배열에서 기존의 id 번호랑 같은 원소를 찾는다. let 찾는객체 = this.#gameList.find(() => {});
     // 찾는객체를 gameList 배열에서 삭제한다.
     // gameList 배열정보를 게임목록 화면에 출력한다. this.printList();
-  }
+   this.deleteData($("#id").val());
+  //    this.deleteData({"id":$("#id").val()});
+    }
 
+    deleteData(id) {
+     let that = this; // this를 that에 저장
+    //  deleteData(deleteGame) {
+      	$.ajax({
+      	    url: "/api/delete-data" // 요청 URL
+      	    , type: "DELETE"          // 전송 방식 (GET, POST 등)
+      	    , dataType: "json"      // 응답 데이터 타입
+      	    , data: JSON.stringify({"id":id})
+    //  	    , data: JSON.stringify(deleteGame)
+      	    , contentType: "application/json"
+      	})
+      	.done(function(data, textStatus, jqXHR) {
+      	    // 요청 성공 시 실행
+      	    alert("성공:", data);
+      //	    $("#result").text(data.message);
+           that.clearInputBox();   // $.ajax 함수안에서 this 는 jquery 객체자신이므로 that 을 사용
+           that.searchList();  // 목록을 새로 고침
+      	})
+      	.fail(function(jqXHR, textStatus, errorThrown) {
+      	    // 요청 실패 시 실행
+      	    alert("실패:", textStatus);
+      	})
+      	.always(function() {
+      	    // 성공/실패 관계없이 항상 실행
+      //	    console.log("요청 완료");
+      	});
+    }
   printOneGame(e) {
     // 화면의 id 값으로 gameList배열에서 찾는다. let id값 = $("#id").val();, let 찾은원소 = this.#gameList.find(() => {});
     let selectId = $(e.currentTarget).find(".idClass").val() * 1;
     console.log(`selectId = ${selectId}`);
-    let findGame = this.#gameList.find((item) => {
-      return item.id === selectId;
-    });
-    if ( findGame == undefined ) {
-      return;
-    }
-    // this.setData2InputBox(찾은원소);
-    this.setData2InputBox(findGame);
+//    let findGame = this.#gameList.find((item) => {
+//      return item.id === selectId;
+//    });
+         this.findById(selectId);
+//    if ( findGame == undefined ) {
+//      return;
+//    }
+//    // this.setData2InputBox(찾은원소);
+//    this.setData2InputBox(findGame);
+  }
+  findId() {
+    // gameList 배열에서 기존의 id 번호랑 같은 원소를 찾는다. let 찾는객체 = this.#gameList.find(() => {});
+    // 찾는객체를 gameList 배열에서 삭제한다.
+    // gameList 배열정보를 게임목록 화면에 출력한다. this.printList();
+    this.findById($("#id").val());
+//    this.deleteData({"id":$("#id").val()});
+  }
+
+  findById(id) {
+   let that = this; // this를 that에 저장
+  	$.ajax({
+  	    url: "/api/getdata?id=" + id // 요청 URL
+  	    , type: "GET"          // 전송 방식 (GET, POST 등)
+  	})
+  	.done(function(data, textStatus, jqXHR) {
+  	  that.setData2InputBox(data.resultData);   // $.ajax 함수안에서 this 는 jquery 객체자신이므로 that 을 사용
+//  	    alert("성공:", data);
+  	})
+  	.fail(function(jqXHR, textStatus, errorThrown) {
+  	    alert("실패:", textStatus);
+  	})
+  	.always(function() {
+  	});
   }
 }
 
 $(() => {
   // jquery 실행
   let nint = new NintendoGame();
-  nint.printList();
+  nint.searchList();
 
   $("#btnAdd").click((e) => {
     nint.addGame();
@@ -255,5 +341,9 @@ $(() => {
 
   $(document).on("click", ".listDataRow", (e) => {
     nint.printOneGame(e);
+  });
+
+  $(document).on("click", "#btnSearch", (e) => {
+    nint.searchList();
   });
 });
