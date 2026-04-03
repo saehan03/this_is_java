@@ -1,9 +1,14 @@
 package com.mjc813.petapp.pet.svc;
 
+import com.mjc813.petapp.pet.PetRequestDto;
 import com.mjc813.petapp.pet.dto.PetDto;
 import com.mjc813.petapp.pet.dto.PetEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PetService {
@@ -50,4 +55,8 @@ public class PetService {
         return result;
     }
 
+    public Slice<PetEntity> findByNameContains(PetRequestDto requestDto, Pageable pageable) {
+        Slice<PetEntity> list = this.petRepository.findByNameContains(requestDto.getSearchName(), pageable);
+        return list;
+    }
 }
