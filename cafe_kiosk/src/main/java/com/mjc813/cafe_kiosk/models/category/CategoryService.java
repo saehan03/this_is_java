@@ -24,7 +24,13 @@ public class CategoryService {
     }
 
     public CategoryDto update(CategoryDto categoryDto) {
-        return null;
+        CategoryEntity newData = this.categoryRepository.findById(categoryDto.getId()).get();
+        CategoryEntity.copyMemberValue(categoryDto);
+
+        this.categoryRepository.save(newData);
+
+        CategoryDto result = new CategoryDto();
+        return result;
     }
 
     public CategoryDto deleteById(Integer id) {
