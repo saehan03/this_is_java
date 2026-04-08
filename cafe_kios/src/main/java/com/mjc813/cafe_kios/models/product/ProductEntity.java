@@ -27,7 +27,7 @@ public class ProductEntity implements IProduct {
     private Integer categoryId;
 
     @JoinColumn(name="category_id", nullable = false)
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity categoryObj;
 
     @Column(length = 500, nullable = true)

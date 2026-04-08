@@ -18,7 +18,7 @@ public class ProductRestController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ProductDto>> update(@RequestBody ProductDto newDto) {
+    public ResponseEntity<ApiResponse<ProductDto>> insert1(@RequestBody ProductDto newDto) {
         ProductDto result = this.productService.insert(newDto);
         ApiResponse<ProductDto> apiResponse = ApiResponse.<ProductDto>builder()
                 .code(ResponseCode.Success)
