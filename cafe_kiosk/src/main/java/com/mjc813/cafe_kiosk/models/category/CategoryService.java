@@ -21,14 +21,11 @@ public class CategoryService {
     }
 
     private @NonNull CategoryDto saveCategoryDto(CategoryDto categoryDto, CategoryEntity newData) {
-        newData.setName(categoryDto.getName());
-        newData.setId(categoryDto.getId());
+        newData.copyMembers(categoryDto, true);
 
         CategoryEntity resEntity = this.categoryRepository.save(newData);
 
-        CategoryDto result = new CategoryDto();
-        result.setId(resEntity.getId());
-        result.setName(resEntity.getName());
+        CategoryDto result = (CategoryDto) new CategoryDto().copyMembers(resEntity, true);
         return result;
     }
 
@@ -45,9 +42,7 @@ public class CategoryService {
 
     public CategoryDto findById(Integer id) {
         CategoryEntity findData = this.categoryRepository.findById(id).orElseThrow();
-        CategoryDto result = new CategoryDto();
-        result.setId(findData.getId());
-        result.setName(findData.getName());
+        CategoryDto result = (CategoryDto) new CategoryDto().copyMembers(findData, true);
         return result;
     }
 
@@ -56,9 +51,8 @@ public class CategoryService {
         List<CategoryEntity> list = slice.getContent();
         List<CategoryDto> resultList = list.stream()
                 .map(categoryEntity -> {
-                    CategoryDto item = new CategoryDto();
-                    item.setId(categoryEntity.getId());
-                    item.setName(categoryEntity.getName());
+                    CategoryDto item = (CategoryDto)CategoryDto.builder().build()
+                            .copyMembers(categoryEntity, true);
                     return item;
                 }).toList();
         Slice<CategoryDto> result = new SliceImpl<>(resultList, pageable, slice.hasNext());

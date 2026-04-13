@@ -2,6 +2,7 @@ package com.mjc813.cafe_kiosk.models.product;
 
 import com.mjc813.cafe_kiosk.models.category.CategoryEntity;
 import jakarta.persistence.*;
+import com.mjc813.cafe_kiosk.models.category.ICategory;
 import lombok.*;
 
 @Getter
@@ -14,7 +15,7 @@ import lombok.*;
 @NamedEntityGraph(name = "ProductEntity.fetchCategory", attributeNodes = {
         @NamedAttributeNode("category")
 })
-public class ProductEntity {
+public class ProductEntity implements IProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,4 +32,12 @@ public class ProductEntity {
 
     @Column(length = 500, nullable = true)
     private String picture;
+
+    @Override
+    public void setCategory(ICategory category) {
+//		if (category == null)
+//			this.category = new CategoryEntity();
+//		}
+        this.category.copyMembers(category, true);
+    }
 }
