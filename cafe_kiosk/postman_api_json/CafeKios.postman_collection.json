@@ -1,0 +1,534 @@
+{
+  "info": {
+    "_postman_id": "b0648153-2358-4b4b-8a78-e4cabd2e8ec1",
+    "name": "CafeKios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16448427",
+    "_collection_link": "https://go.postman.co/collection/16448427-b0648153-2358-4b4b-8a78-e4cabd2e8ec1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "category_insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": null\r\n    , \"name\": \"차2\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/cat",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "cat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "category_update",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 5\r\n    , \"name\": \"Tea222\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/cat",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "cat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "category_delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/cat/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "cat",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "category_findbyid",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/cat/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "cat",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "category_search",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/cat/search?name=&size=2&sort=id,desc&page=0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "cat",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "size",
+              "value": "2"
+            },
+            {
+              "key": "sort",
+              "value": "id,desc"
+            },
+            {
+              "key": "page",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": null\r\n    , \"name\": \"피자케익\"\r\n    , \"price\": 2900\r\n    , \"category\": { \"id\": 3 }\r\n    , \"picture\": \"피자케익.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_update",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 3\r\n    , \"name\": \"계란빵\"\r\n    , \"category\": { \"id\": 3 }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_findbyid",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_search_name",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd/search?name=&size=3&sort=id,desc&page=0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "size",
+              "value": "3"
+            },
+            {
+              "key": "sort",
+              "value": "id,desc"
+            },
+            {
+              "key": "page",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_greate_price",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd/pricegt?price=1600",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd",
+            "pricegt"
+          ],
+          "query": [
+            {
+              "key": "price",
+              "value": "1600"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product_category",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/prd/cat",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "prd",
+            "cat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sale_insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"product\": { \"id\": 5 }\r\n    , \"price\": 1900\r\n    , \"qty\": 5\r\n    , \"saleTime\" : \"2026-04-13T20:19:11\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/sale",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "sale"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sale_findbyid",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/sale/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "sale",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sale_update",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1\r\n    , \"product\": { \"id\": 2 }\r\n    , \"qty\": 4\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/v1/sale",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "sale"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sale_deletebyid",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/sale/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "sale",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sale_findby_product",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/sale/prd/2?sort=saleTime,desc&page=0&size=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "sale",
+            "prd",
+            "2"
+          ],
+          "query": [
+            {
+              "key": "sort",
+              "value": "saleTime,desc"
+            },
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sale_sum_date",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/v1/sale/date?start=2026-04-13&end=2026-04-14",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "v1",
+            "sale",
+            "date"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-04-13"
+            },
+            {
+              "key": "end",
+              "value": "2026-04-14"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
