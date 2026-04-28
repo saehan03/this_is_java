@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/cookie")
-public class CookieRestConroller {
+public class CookieRestController {
 	@Autowired
 	private CookieService cookieService;
 
