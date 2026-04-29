@@ -60,4 +60,7 @@ bin/
 .gradle/
 gradle/
 
-mysql-data/
+# gradle 정보 제외
+.gitattributes
+gradlew
+gradlew.bat
