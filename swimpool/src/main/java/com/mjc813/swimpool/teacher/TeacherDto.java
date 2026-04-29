@@ -1,4 +1,4 @@
-package com.mjc813.swim.teacher;
+package com.mjc813.swimpool.teacher;
 
 import lombok.*;
 
