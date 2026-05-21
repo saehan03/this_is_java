@@ -9,6 +9,7 @@ public enum ResponseCode {
     UPDATE_ERROR(41000),
     DELETE_ERROR(41000),
     SELECT_ERROR(41000),
+    SERVER_ERROR(49000),
     DATA_NOT_FOUND_ERROR(41000),
     AUTHENTICATION_ERROR(41000), // 로그인 인증 에러
     AUTHORIZATION_ERROR(41000); // 자원을 사용하기 위한 권한 (인가) 에러

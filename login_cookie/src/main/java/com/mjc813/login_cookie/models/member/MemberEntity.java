@@ -17,8 +17,8 @@ public class MemberEntity implements IMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 20)
-    private String signid;
+    @Column(name = "sign_id", nullable = false, length = 20, unique = true)
+    private String signId;
 
     @Column(nullable = false, length = 200)
     private String password;
@@ -27,14 +27,14 @@ public class MemberEntity implements IMember {
     private String email;
 
     @Column(name = "is_valid_email", nullable = false)
-    private Boolean isvalidEmail;
+    private Boolean isValidEmail;
 
     @Column(name = "create_dt", nullable = false)
     private LocalDateTime createDt;
 
-    @Column(name = "update_dt", nullable = false)
+    @Column(name = "update_dt")
     private LocalDateTime updateDt;
 
-    @Column(name = "delete_dt", nullable = false)
+    @Column(name = "delete_dt")
     private LocalDateTime deleteDt;
 }
