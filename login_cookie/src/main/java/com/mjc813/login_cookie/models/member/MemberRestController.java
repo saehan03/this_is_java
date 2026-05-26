@@ -11,22 +11,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/member")
 public class MemberRestController {
-    @Autowired
-    private MemberService memberService;
+	@Autowired
+	private MemberService memberService;
 
-    @PostMapping("")
-    public ResponseEntity<ComResponseDto<MemberDto>> insert(@RequestBody MemberDto memberDto) {
-        MemberDto result = this.memberService.insert(memberDto, true);
-        return ResponseEntity.status(201).body(
-                ComResponseDto.make(ResponseCode.SUCCESS, result)
-        );
-    }
+	@PostMapping("")
+	public ResponseEntity<ComResponseDto<MemberDto>> insert(@RequestBody MemberDto memberDto) {
+		MemberDto result = this.memberService.insert(memberDto, true);
+		return ResponseEntity.status(201).body(
+			ComResponseDto.make(ResponseCode.SUCCESS, result)
+		);
+	}
 
-    @GetMapping("")
-    public ResponseEntity<ComResponseDto<List<MemberDto>>> findAll() {
-        List<MemberDto> result = this.memberService.findAll();
-        return ResponseEntity.status(200).body(
-                ComResponseDto.make(ResponseCode.SUCCESS, result)
-        );
-    }
+	@GetMapping("")
+	public ResponseEntity<ComResponseDto<List<MemberDto>>> findAll() {
+		List<MemberDto> result = this.memberService.findAll();
+		return ResponseEntity.status(200).body(
+				ComResponseDto.make(ResponseCode.SUCCESS, result)
+		);
+	}
 }

@@ -13,25 +13,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ValidEmailDto implements IMember {
-    @JsonIgnore
-    private Long id;
+	@JsonIgnore
+	private Long id;
 
-    private String signId;
+	private String signId;
 
-    @JsonIgnore
-    private String password;
-    @JsonIgnore
-    private String email;
-    @JsonIgnore
-    private String role;
-    @JsonIgnore
-    private Boolean isValidEmail;
+	@JsonIgnore
+	private String password;
+	@JsonIgnore
+	private String email;
+	@JsonIgnore
+	private String role;
+	@JsonIgnore
+	private Boolean isValidEmail;
 
-    private String validText;
-    @JsonIgnore
-    private LocalDateTime createDt;
-    @JsonIgnore
-    private LocalDateTime updateDt;
-    @JsonIgnore
-    private LocalDateTime deleteDt;
+	private String validText;
+	@JsonIgnore
+	private LocalDateTime createDt;
+	@JsonIgnore
+	private LocalDateTime updateDt;
+	@JsonIgnore
+	private LocalDateTime deleteDt;
 }
