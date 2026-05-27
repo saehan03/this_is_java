@@ -1,19 +1,14 @@
-package com.mjc813.login_cookie.models.music;
+package com.mjc813.login_session.models.music;
 
-import com.mjc813.login_cookie.common.ComResponseDto;
-import com.mjc813.login_cookie.common.ResponseCode;
-import com.mjc813.login_cookie.models.member.IMember;
-import com.mjc813.login_cookie.models.member.MemberDto;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
+import com.mjc813.login_session.common.ComResponseDto;
+import com.mjc813.login_session.common.ResponseCode;
+import com.mjc813.login_session.models.member.IMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/music")
@@ -28,12 +23,12 @@ public class MusicRestController {
 		if ( !this.IsUserOrAdmin(model) ) {
 			// 존재하지 않으면 인가 에러를 출력한다.
 			return ResponseEntity.status(500).body(
-					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
+				ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
 			);
 		}
 		MusicDto result = this.musicService.insert(insertDto);
 		return ResponseEntity.status(201).body(
-				ComResponseDto.make(ResponseCode.SUCCESS, result)
+			ComResponseDto.make(ResponseCode.SUCCESS, result)
 		);
 	}
 
@@ -73,7 +68,7 @@ public class MusicRestController {
 	}
 
 	@GetMapping("/{id}")
-		public ResponseEntity<ComResponseDto<MusicDto>> findById(@PathVariable Long id) {
+	public ResponseEntity<ComResponseDto<MusicDto>> findById(@PathVariable Long id) {
 		MusicDto result = this.musicService.findById(id);
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, result)
@@ -81,9 +76,9 @@ public class MusicRestController {
 	}
 
 	@GetMapping("/all")
-		public ResponseEntity<ComResponseDto<List<MusicDto>>> findAll(
+	public ResponseEntity<ComResponseDto<List<MusicDto>>> findAll(
 //			HttpServletRequest request
-				@CookieValue(name="MJC_LOGIN", required = true) String signId
+			@SessionAttribute(name = "MJC_LOGIN", required = false) String signId
 	) {
 //		Cookie[] cookies = request.getCookies();
 		try {
