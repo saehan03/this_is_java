@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "756d3e0f-f985-4e46-a225-699a64eeb3e9",
-    "name": "Security",
+    "name": "Security Session",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "16448427",
     "_collection_link": "https://go.postman.co/collection/16448427-756d3e0f-f985-4e46-a225-699a64eeb3e9?source=collection_link"
@@ -22,7 +22,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8181/api/v1/auth/signup",
+          "raw": "http://localhost:8282/api/v1/auth/signup",
           "protocol": "http",
           "host": [
             "localhost"
@@ -44,7 +44,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8181/api/v1/auth/emailtest/1",
+          "raw": "http://localhost:8282/api/v1/auth/emailtest/1",
           "protocol": "http",
           "host": [
             "localhost"
@@ -76,7 +76,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8181/api/v1/music",
+          "raw": "http://localhost:8282/api/v1/music",
           "protocol": "http",
           "host": [
             "localhost"
@@ -97,7 +97,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8181/api/v1/music/all",
+          "raw": "http://localhost:8282/api/v1/music/all",
           "protocol": "http",
           "host": [
             "localhost"

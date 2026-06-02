@@ -2,15 +2,24 @@ package com.mjc813.login_cookie.models.music;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MusicDto implements IMusic {
+public class MusicDto implements com.mjc813.login_cookie.models.music.IMusic {
 	private Long id;
 	private String title;
 	private String artist;
 	private String playtime;
+
+	private String createId;
+	private LocalDateTime createDt;
+	private String updateId;
+	private LocalDateTime updateDt;
+	private String deleteId;
+	private LocalDateTime deleteDt;
 }
