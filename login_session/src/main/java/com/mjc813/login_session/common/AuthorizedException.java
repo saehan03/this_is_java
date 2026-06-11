@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class AuthorizedException extends Exception {
-    private String message;
+	private String message;
 }

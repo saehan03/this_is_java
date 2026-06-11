@@ -10,11 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import com.mjc813.login_session.common.LoginException;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/music")
@@ -24,6 +21,7 @@ public class MusicRestController {
 
 	@PostMapping("")
 	public ResponseEntity<ComResponseDto<MusicDto>> insert(Model model, @RequestBody MusicDto insertDto) throws LoginException {
+		// 이 곳 Controller 에서 isUserOrAdmin 을 사용하는 것보다 Service 안에서 사용하는게 좋다. update, delete 참고하세요
 		IMember signedMember = this.isUserOrAdmin(model);
 		if ( signedMember == null ) {
 			// 존재하지 않으면 인가 에러를 출력한다.
@@ -55,28 +53,28 @@ public class MusicRestController {
 		);
 	}
 
-		@DeleteMapping("/{id}")
-		public ResponseEntity<ComResponseDto<MusicDto>> update (Model model
-				, @PathVariable Long id) throws Mjc813Exception {
-			MusicDto result = this.musicService.deleteById(model, id);
-			return ResponseEntity.status(200).body(
-					ComResponseDto.make(ResponseCode.SUCCESS, result)
-			);
-		}
-
-		@GetMapping("/{id}")
-		public ResponseEntity<ComResponseDto<MusicDto>> findById (@PathVariable Long id) throws Mjc813Exception {
-			MusicDto result = this.musicService.findById(id);
-			return ResponseEntity.status(200).body(
-					ComResponseDto.make(ResponseCode.SUCCESS, result)
-			);
-		}
-
-		@GetMapping("/all")
-		public ResponseEntity<ComResponseDto<List<MusicDto>>> findAll (Model model) throws Mjc813Exception {
-			List<MusicDto> result = this.musicService.findAll(model);
-			return ResponseEntity.status(200).body(
-					ComResponseDto.make(ResponseCode.SUCCESS, result)
-			);
-		}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ComResponseDto<MusicDto>> deleteById(Model model
+			, @PathVariable Long id) throws Mjc813Exception {
+		MusicDto result = this.musicService.deleteById(model, id);
+		return ResponseEntity.status(200).body(
+				ComResponseDto.make(ResponseCode.SUCCESS, result)
+		);
 	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<ComResponseDto<MusicDto>> findById(@PathVariable Long id) throws Mjc813Exception {
+		MusicDto result = this.musicService.findById(id);
+		return ResponseEntity.status(200).body(
+				ComResponseDto.make(ResponseCode.SUCCESS, result)
+		);
+	}
+
+	@GetMapping("/all")
+	public ResponseEntity<ComResponseDto<List<MusicDto>>> findAll(Model model) throws Mjc813Exception {
+		List<MusicDto> result = this.musicService.findAll(model);
+		return ResponseEntity.status(200).body(
+				ComResponseDto.make(ResponseCode.SUCCESS, result)
+		);
+	}
+}

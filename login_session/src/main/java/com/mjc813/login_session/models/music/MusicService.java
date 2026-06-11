@@ -1,5 +1,6 @@
 package com.mjc813.login_session.models.music;
 
+import com.mjc813.login_session.common.AuthorizedException;
 import com.mjc813.login_session.common.LoginException;
 import com.mjc813.login_session.common.Mjc813Exception;
 import com.mjc813.login_session.common.ResponseCode;
@@ -84,10 +85,9 @@ public class MusicService {
 		if ( musicEntity.isEmpty() ) {
 			throw new Mjc813Exception(ResponseCode.DATA_NOT_FOUND_ERROR, "data is not exist");
 		}
-
 		MusicDto find = (MusicDto)new MusicDto().copyMembers(musicEntity.get(), true);
 		return find;
-		//		MusicEntity musicEntity = this.musicJpaRepository.findById(id).orElseThrow();
+//		MusicEntity musicEntity = this.musicJpaRepository.findById(id).orElseThrow();
 //		MusicDto find = (MusicDto)new MusicDto().copyMembers(musicEntity, true);
 //		if ( find == null || find.getDeleteId() != null ) {
 //			// deleteId 가 null 이 아니면 삭제된 데이터를 뜻한다.

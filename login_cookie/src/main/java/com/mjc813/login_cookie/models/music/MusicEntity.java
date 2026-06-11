@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity(name = "music")
-public class MusicEntity implements com.mjc813.login_cookie.models.music.IMusic {
+public class MusicEntity implements IMusic {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
