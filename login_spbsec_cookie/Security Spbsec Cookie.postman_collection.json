@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "756d3e0f-f985-4e46-a225-699a64eeb3e9",
-    "name": "Security Spbsec Cookie",
+    "name": "Security Spring Security Cookie",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "16448427",
     "_collection_link": "https://go.postman.co/collection/16448427-756d3e0f-f985-4e46-a225-699a64eeb3e9?source=collection_link"

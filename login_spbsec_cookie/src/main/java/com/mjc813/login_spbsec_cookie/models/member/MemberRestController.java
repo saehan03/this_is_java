@@ -4,6 +4,7 @@ import com.mjc813.login_spbsec_cookie.common.ComResponseDto;
 import com.mjc813.login_spbsec_cookie.common.ResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class MemberRestController {
 	}
 
 	@GetMapping("")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<ComResponseDto<List<MemberDto>>> findAll() {
 		List<MemberDto> result = this.memberService.findAll();
 		return ResponseEntity.status(200).body(

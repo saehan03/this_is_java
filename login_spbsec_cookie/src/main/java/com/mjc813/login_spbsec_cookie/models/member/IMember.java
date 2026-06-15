@@ -1,15 +1,8 @@
 package com.mjc813.login_spbsec_cookie.models.member;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-public interface IMember extends UserDetails {
+public interface IMember {
 	Long getId();
 	void setId(Long id);
 
@@ -75,18 +68,5 @@ public interface IMember extends UserDetails {
 			this.setDeleteDt(source.getDeleteDt());
 		}
 		return this;
-	}
-
-	@Override
-	default Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		SimpleGrantedAuthority sga = new SimpleGrantedAuthority(this.getRole());
-		list.add(sga);
-		return list;
-	}
-
-	@Override
-	default String getUsername() {
-		return this.getSignId();
 	}
 }

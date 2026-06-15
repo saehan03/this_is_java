@@ -1,11 +1,8 @@
 package com.mjc813.login_spbsec_cookie.models.member;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,5 +21,4 @@ public class MemberDto implements IMember {
 	private LocalDateTime createDt;
 	private LocalDateTime updateDt;
 	private LocalDateTime deleteDt;
-
 }
