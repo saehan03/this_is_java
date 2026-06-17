@@ -88,7 +88,7 @@ public class MusicService {
 		// findAll 은 모든 자료를 조회해서 리턴하므로 자료의 갯수가 전부 20~30개 정도를 넘으면 별로 안좋은 기능이다.
 		// 그 보다 많은 데이터를 조회하려면 Paging 이나 Slicing 으로 조회하세요
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		IMember signedMember = (IMember)authentication.getPrincipal();
+		IMember signedMember = (IMember)authentication.getPrincipal();          	// 자주 사용해서 봐야할것.
 		if ( signedMember == null ) {
 			throw new Mjc813Exception(ResponseCode.AUTHORIZATION_ERROR, "authorize is now allow for findall");
 		}
