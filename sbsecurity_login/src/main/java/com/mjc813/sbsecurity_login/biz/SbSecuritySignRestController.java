@@ -31,7 +31,7 @@ public class SbSecuritySignRestController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<ComResponseDto<IMember>> signUp(@RequestBody SignUpDto signUpDto) {
-		MemberDto memberDto = (MemberDto)new MemberDto().clone(signUpDto, true);
+		MemberDto memberDto = (MemberDto)new MemberDto().copyMembers(signUpDto, true);
 		MemberDto inserted = this.memberService.insert(memberDto, false);
 		return ResponseEntity.status(201).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, inserted)
