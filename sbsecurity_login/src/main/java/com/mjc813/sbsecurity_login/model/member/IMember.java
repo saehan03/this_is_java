@@ -40,7 +40,7 @@ public interface IMember extends UserDetails {
 	LocalDateTime getDeleteDt();
 	void setDeleteDt(LocalDateTime deleteDt);
 
-	default IMember clone(IMember source, boolean bForced) {
+	default IMember copyMembers(IMember source, boolean bForced) {
 		if ( source == null ) {
 			return this;
 		}

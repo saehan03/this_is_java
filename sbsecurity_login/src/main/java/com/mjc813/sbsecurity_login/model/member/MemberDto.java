@@ -21,4 +21,8 @@ public class MemberDto implements IMember {
 	private LocalDateTime createDt;
 	private LocalDateTime updateDt;
 	private LocalDateTime deleteDt;
+
+	private String createId;
+	private String updateId;
+	private String deleteId;
 }
