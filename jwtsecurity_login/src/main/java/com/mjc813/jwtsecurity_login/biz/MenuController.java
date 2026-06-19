@@ -1,7 +1,7 @@
 package com.mjc813.jwtsecurity_login.biz;
 
-import com.mjc813.sbsecurity_login.model.member.IMember;
-import com.mjc813.sbsecurity_login.model.member.MemberService;
+import com.mjc813.jwtsecurity_login.model.member.IMember;
+import com.mjc813.jwtsecurity_login.model.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

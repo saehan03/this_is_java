@@ -1,9 +1,9 @@
-package com.mjc813.sbsecurity_login.music;
+package com.mjc813.jwtsecurity_login.model.music;
 
-import com.mjc813.sbsecurity_login.common.LoginException;
-import com.mjc813.sbsecurity_login.common.Mjc813Exception;
-import com.mjc813.sbsecurity_login.common.ResponseCode;
-import com.mjc813.sbsecurity_login.model.member.IMember;
+import com.mjc813.jwtsecurity_login.common.LoginException;
+import com.mjc813.jwtsecurity_login.common.Mjc813Exception;
+import com.mjc813.jwtsecurity_login.common.ResponseCode;
+import com.mjc813.jwtsecurity_login.model.member.IMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

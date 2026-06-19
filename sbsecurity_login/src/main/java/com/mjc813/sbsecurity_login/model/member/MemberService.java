@@ -2,8 +2,6 @@ package com.mjc813.sbsecurity_login.model.member;
 
 import com.mjc813.sbsecurity_login.common.Mjc813Exception;
 import com.mjc813.sbsecurity_login.common.Util;
-import com.mjc813.sbsecurity_login.music.MusicDto;
-import com.mjc813.sbsecurity_login.music.MusicEntity;
 import com.mjc813.sbsecurity_login.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

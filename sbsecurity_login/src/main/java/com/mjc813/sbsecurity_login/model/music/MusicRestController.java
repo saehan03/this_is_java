@@ -1,4 +1,4 @@
-package com.mjc813.sbsecurity_login.music;
+package com.mjc813.sbsecurity_login.model.music;
 
 import com.mjc813.sbsecurity_login.common.ComResponseDto;
 import com.mjc813.sbsecurity_login.common.LoginException;

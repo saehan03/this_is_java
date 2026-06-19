@@ -1,4 +1,4 @@
-package com.mjc813.sbsecurity_login.music;
+package com.mjc813.sbsecurity_login.model.music;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

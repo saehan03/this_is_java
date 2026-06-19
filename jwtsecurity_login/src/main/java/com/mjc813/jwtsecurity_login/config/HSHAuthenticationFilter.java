@@ -1,7 +1,7 @@
 package com.mjc813.jwtsecurity_login.config;
 
-import com.mjc813.sbsecurity_login.model.member.MemberDto;
-import com.mjc813.sbsecurity_login.model.member.MemberService;
+import com.mjc813.jwtsecurity_login.model.member.MemberDto;
+import com.mjc813.jwtsecurity_login.model.member.MemberService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

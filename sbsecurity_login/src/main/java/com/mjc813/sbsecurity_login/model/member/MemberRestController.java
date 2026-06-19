@@ -3,7 +3,6 @@ package com.mjc813.sbsecurity_login.model.member;
 import com.mjc813.sbsecurity_login.common.ComResponseDto;
 import com.mjc813.sbsecurity_login.common.Mjc813Exception;
 import com.mjc813.sbsecurity_login.common.ResponseCode;
-import com.mjc813.sbsecurity_login.music.MusicDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

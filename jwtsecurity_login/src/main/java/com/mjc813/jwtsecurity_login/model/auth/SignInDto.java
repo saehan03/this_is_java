@@ -1,7 +1,7 @@
 package com.mjc813.jwtsecurity_login.model.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mjc813.sbsecurity_login.model.member.IMember;
+import com.mjc813.jwtsecurity_login.model.member.IMember;
 import lombok.*;
 
 import java.time.LocalDateTime;

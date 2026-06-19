@@ -1,4 +1,4 @@
-package com.mjc813.sbsecurity_login.music;
+package com.mjc813.jwtsecurity_login.model.music;
 
 import java.time.LocalDateTime;
 
