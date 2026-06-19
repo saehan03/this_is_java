@@ -2,7 +2,7 @@ package com.mjc813.jwtsecurity_login.model.member;
 
 import com.mjc813.jwtsecurity_login.common.Mjc813Exception;
 import com.mjc813.jwtsecurity_login.common.Util;
-import com.mjc813.jwtsecurity_login.role.Role;
+import com.mjc813.jwtsecurity_login.model.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
