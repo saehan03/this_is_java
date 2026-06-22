@@ -5,12 +5,15 @@ import com.mjc813.jwtsecurity_login.jwt.JwtIllegalException;
 import com.mjc813.jwtsecurity_login.jwt.JwtUtils;
 import com.mjc813.jwtsecurity_login.model.member.MemberDto;
 import com.mjc813.jwtsecurity_login.model.member.MemberService;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -25,6 +28,7 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Slf4j
     @Override
     protected void doFilterInternal(HttpServletRequest request
             , HttpServletResponse response
@@ -40,7 +44,14 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
-        } catch (JwtExpireException | JwtIllegalException | JwtException e) {
+        } catch (ExpiredJwtException e ) {
+            log.error(e.getMessage());
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            SecurityContextHolder.clearContext();
+            return;
+        } catch (JwtIllegalException | JwtException e) {
+            log.error(e.getMessage());
+            SecurityContextHolder.clearContext();
         }
         filterChain.doFilter(request, response);
     }
