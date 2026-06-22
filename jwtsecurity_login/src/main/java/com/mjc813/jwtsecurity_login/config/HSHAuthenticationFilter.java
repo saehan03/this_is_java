@@ -1,12 +1,15 @@
 package com.mjc813.jwtsecurity_login.config;
 
+import com.mjc813.jwtsecurity_login.jwt.JwtExpireException;
+import com.mjc813.jwtsecurity_login.jwt.JwtIllegalException;
+import com.mjc813.jwtsecurity_login.jwt.JwtUtils;
 import com.mjc813.jwtsecurity_login.model.member.MemberDto;
 import com.mjc813.jwtsecurity_login.model.member.MemberService;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,19 +22,25 @@ import java.io.IOException;
 public class HSHAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request
             , HttpServletResponse response
             , FilterChain filterChain) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Object signObj = session.getAttribute("MJC_LOGIN");
-        if ( signObj instanceof String signId ) {
-            MemberDto find = this.memberService.findBySignId(signId);
-            UsernamePasswordAuthenticationToken auth = new  UsernamePasswordAuthenticationToken(
-                    find, null, find.getAuthorities()
-            );
-            SecurityContextHolder.getContext().setAuthentication(auth);
+        String authHeader = request.getHeader("Authorization");
+        try {
+            String jwtAccessToken = this.jwtUtils.resolveJwtTokenFromBearerToken(authHeader);
+            if ( jwtAccessToken != null ) {
+                String signId = this.jwtUtils.getSignId(jwtAccessToken);
+                MemberDto find = this.memberService.findBySignId(signId);
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                        find, null, find.getAuthorities()
+                );
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        } catch (JwtExpireException | JwtIllegalException | JwtException e) {
         }
         filterChain.doFilter(request, response);
     }
