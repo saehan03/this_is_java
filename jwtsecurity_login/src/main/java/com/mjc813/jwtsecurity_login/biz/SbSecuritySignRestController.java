@@ -60,6 +60,10 @@ public class SbSecuritySignRestController {
 //		String accessToken = jwtUtils.generateToken(signMember);
 
 		AuthTokenDto authTokenDto = new AuthTokenDto(accessToken, refreshToken);
+
+		// 정상적으로 signin 했을 때 사용자 정보를 redis 저장한다.
+		this.jwtUtils.saveRedis(signInDto.getSignId(), authTokenDto);
+
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, authTokenDto)
 		);
@@ -67,15 +71,26 @@ public class SbSecuritySignRestController {
 
 	@GetMapping("/signout")
 	public ResponseEntity<ComResponseDto<Boolean>> signout(HttpSession session) {
-		session.invalidate();
+//		session.invalidate();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		IMember signedMember = (IMember)authentication.getPrincipal();
+		this.jwtUtils.removeRedis(signedMember.getSignId());
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, true)
 		);
 	}
 
 	@PostMapping("/refresh")
-	public ResponseEntity<ComResponseDto<AuthTokenDto>> refresh(@RequestBody RefreshAuthTokenDto authToken) {
+	public ResponseEntity<ComResponseDto<AuthTokenDto>> refresh(
+			@RequestBody RefreshAuthTokenDto authToken
+	) {
 		String signId = authToken.getSignId();
+		if ( this.jwtUtils.findRedis(signId) == null ) {
+			// 사인아웃 했던 유저는 refresh 토큰을 받아가면 안된다.
+			return ResponseEntity.status(500).body(
+					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
+			);
+		}
 		String accessToken = authToken.getAccessToken();
 		try {
 			this.jwtUtils.validateToken(accessToken);

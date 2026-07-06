@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    command: [ "redis-server" ]
+    environment:
+      - REDIS_ARGS=--requirepass mjc813pass
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis-data:/data

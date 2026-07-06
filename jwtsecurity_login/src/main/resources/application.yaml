@@ -21,6 +21,20 @@ spring:
   #  web:
   #    resources:
   #      add-mappings: false # 404.html 출력 하지 마라
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: your_redis_password
+      database: 0
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
 server:
   port: 8083
   servlet:
@@ -33,3 +47,4 @@ myapp:
   jwt:
     secret: thisismyjwtsecretkey!123456abcdef
     expireAccessToken: 1800000 # 30 * 60 * 1000
+

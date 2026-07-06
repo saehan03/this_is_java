@@ -28,7 +28,7 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Slf4j
+//    @Slf4j
     @Override
     protected void doFilterInternal(HttpServletRequest request
             , HttpServletResponse response
@@ -38,19 +38,27 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
             String jwtAccessToken = this.jwtUtils.resolveJwtTokenFromBearerToken(authHeader);
             if ( jwtAccessToken != null ) {
                 String signId = this.jwtUtils.getSignId(jwtAccessToken);
-                MemberDto find = this.memberService.findBySignId(signId);
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        find, null, find.getAuthorities()
-                );
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                if ( this.jwtUtils.findRedis(signId) != null ) {
+                    MemberDto find = this.memberService.findBySignId(signId);
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                            find, null, find.getAuthorities()
+                    );
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                } else {  // 사인아웃 했다면
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                    SecurityContextHolder.clearContext();
+                    filterChain.doFilter(request, response);
+                    return;
+                }
             }
         } catch (ExpiredJwtException e ) {
-            log.error(e.getMessage());
+//            log.error(e.getMessage());
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             SecurityContextHolder.clearContext();
+            filterChain.doFilter(request, response);
             return;
         } catch (JwtIllegalException | JwtException e) {
-            log.error(e.getMessage());
+//            log.error(e.getMessage());
             SecurityContextHolder.clearContext();
         }
         filterChain.doFilter(request, response);

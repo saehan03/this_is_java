@@ -70,9 +70,12 @@ public class HSHWebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors( x-> x.configurationSource(corsConfigurationSource()))
                 .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-                .authorizeHttpRequests( x-> x.requestMatchers("/").permitAll()
+                .authorizeHttpRequests( x-> x
+                        .requestMatchers("/").permitAll()
                         .requestMatchers("/signin").permitAll()
                         .requestMatchers("/signup").permitAll()
+                        .requestMatchers("/api/v1/auth/signout").authenticated()
+//                        .requestMatchers("/api/v1/auth/refresh").authenticated()
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
