@@ -1,26 +1,30 @@
 package com.mjc813.jwtsecurity_login.config;
 
-import com.mjc813.jwtsecurity_login.jwt.JwtExpireException;
 import com.mjc813.jwtsecurity_login.jwt.JwtIllegalException;
 import com.mjc813.jwtsecurity_login.jwt.JwtUtils;
 import com.mjc813.jwtsecurity_login.model.member.MemberDto;
 import com.mjc813.jwtsecurity_login.model.member.MemberService;
+import com.mjc813.jwtsecurity_login.model.redismember.RedisMemberDto;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class HSHAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
@@ -28,7 +32,6 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
-//    @Slf4j
     @Override
     protected void doFilterInternal(HttpServletRequest request
             , HttpServletResponse response
@@ -38,10 +41,11 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
             String jwtAccessToken = this.jwtUtils.resolveJwtTokenFromBearerToken(authHeader);
             if ( jwtAccessToken != null ) {
                 String signId = this.jwtUtils.getSignId(jwtAccessToken);
-                if ( this.jwtUtils.findRedis(signId) != null ) {
-                    MemberDto find = this.memberService.findBySignId(signId);
+                RedisMemberDto findDto = this.jwtUtils.findRedis(signId);
+                if ( findDto != null ) {
+//					MemberDto find = this.memberService.findBySignId(signId);
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                            find, null, find.getAuthorities()
+                            findDto, null, findDto.getAuthorities()
                     );
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 } else {  // 사인아웃 했다면
@@ -52,13 +56,13 @@ public class HSHAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (ExpiredJwtException e ) {
-//            log.error(e.getMessage());
+            log.error(e.getMessage());
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             SecurityContextHolder.clearContext();
             filterChain.doFilter(request, response);
             return;
         } catch (JwtIllegalException | JwtException e) {
-//            log.error(e.getMessage());
+            log.error(e.getMessage());
             SecurityContextHolder.clearContext();
         }
         filterChain.doFilter(request, response);

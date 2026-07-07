@@ -11,6 +11,7 @@ import com.mjc813.jwtsecurity_login.model.auth.SignUpDto;
 import com.mjc813.jwtsecurity_login.model.member.IMember;
 import com.mjc813.jwtsecurity_login.model.member.MemberDto;
 import com.mjc813.jwtsecurity_login.model.member.MemberService;
+import com.mjc813.jwtsecurity_login.model.redismember.RedisMemberDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,12 @@ public class SbSecuritySignRestController {
 //		MemberDto signMember = this.memberService.findBySignId(signInDto.getSignId());
 //		String accessToken = jwtUtils.generateToken(signMember);
 
+		MemberDto signMember = this.memberService.findBySignId(signInDto.getSignId());
+
 		AuthTokenDto authTokenDto = new AuthTokenDto(accessToken, refreshToken);
 
 		// 정상적으로 signin 했을 때 사용자 정보를 redis 저장한다.
-		this.jwtUtils.saveRedis(signInDto.getSignId(), authTokenDto);
+		this.jwtUtils.saveRedis(signMember, authTokenDto);
 
 		return ResponseEntity.status(200).body(
 				ComResponseDto.make(ResponseCode.SUCCESS, authTokenDto)
@@ -85,7 +88,8 @@ public class SbSecuritySignRestController {
 			@RequestBody RefreshAuthTokenDto authToken
 	) {
 		String signId = authToken.getSignId();
-		if ( this.jwtUtils.findRedis(signId) == null ) {
+		RedisMemberDto findDto = this.jwtUtils.findRedis(signId);
+		if ( findDto == null ) {
 			// 사인아웃 했던 유저는 refresh 토큰을 받아가면 안된다.
 			return ResponseEntity.status(500).body(
 					ComResponseDto.make(ResponseCode.AUTHORIZATION_ERROR, null)
@@ -99,6 +103,7 @@ public class SbSecuritySignRestController {
 			String newAccessToken = this.jwtUtils.generateAccessToken(signId);
 			String newRefreshToken = this.jwtUtils.generateRefreshToken(signId);
 			AuthTokenDto authTokenDto = new AuthTokenDto(newAccessToken, newRefreshToken);
+			this.jwtUtils.updateRedis(findDto, authTokenDto);
 			return ResponseEntity.status(200).body(
 					ComResponseDto.make(ResponseCode.SUCCESS, authTokenDto)
 			);
