@@ -1,9 +1,10 @@
 package com.mjc813.jwtsecurity_login.model.redismember;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +13,8 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-
+@Builder
+@RedisHash(value = "member")
 public class RedisMemberEntity implements IRedisMember {
     private Long id;
 

@@ -24,6 +24,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 import java.util.List;
+import com.mjc813.jwtsecurity_login.oauth2.OAuth2FailHandler;
+import com.mjc813.jwtsecurity_login.oauth2.OAuth2MemberService;
+import com.mjc813.jwtsecurity_login.oauth2.OAuth2SuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +36,12 @@ public class HSHWebSecurityConfig {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private OAuth2MemberService oauth2MemberService;
+    @Autowired
+    private OAuth2FailHandler oauth2FailHandler;
+    @Autowired
+    private OAuth2SuccessHandler oauth2SuccessHandler;
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -75,12 +84,19 @@ public class HSHWebSecurityConfig {
                         .requestMatchers("/signin").permitAll()
                         .requestMatchers("/signup").permitAll()
                         .requestMatchers("/api/v1/auth/signout").authenticated()
-//                        .requestMatchers("/api/v1/auth/refresh").authenticated()
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/oauth2/**").permitAll()
+                        .requestMatchers("/login/oauth2/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(x ->
                         x.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .oauth2Login(x -> x.userInfoEndpoint(
+                                        u -> u.userService(oauth2MemberService)
+                                )
+                                .successHandler(oauth2SuccessHandler)
+                                .failureHandler(oauth2FailHandler)
                 )
                 .authenticationProvider(daoAuthenticationProvider())
                 .addFilterBefore(hshAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

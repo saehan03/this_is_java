@@ -48,8 +48,4 @@ password varchar(200) not null (암호화)
 email varchar(200) not null unique
 is_valid_email bool default false
 valid_text varchar(100) null
-create_dt datetime not null
-update_dt datetime null
-delete_dt datetime null
-
 ```

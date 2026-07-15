@@ -10,6 +10,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -22,11 +23,13 @@ public class JwtUtils {
     //	private StringRedisTemplate redisTemplate;
     @Autowired
     private RedisMemberService redisMemberService;
-    //	@Value("${myapp.jwt.expireAccessToken}")
+    @Value("${myapp.jwt.secret:thisismyjwtsecretkey!123456abcdef}")
     private String secret = "thisismyjwtsecretkey!123456abcdef";
-    //	@Value("${myapp.jwt.expireAccessToken}")
-    private Long expireAccessToken = 1800000L; // 30분
-    private Long expireRefreshToken = 604800000L; // 7일
+
+    @Value("${myapp.jwt.expireAccessToken:1800}")
+    private Long expireAccessToken; // 30분
+    @Value("${myapp.jwt.expireRefreshToken:604800}")
+    private Long expireRefreshToken; // 7일
 
     private final SecretKey secretKey;
 
@@ -42,27 +45,27 @@ public class JwtUtils {
         return this.generateToken(value, this.expireRefreshToken);
     }
 
-    public String generateToken(String value, Long milliSeconds) {
+    public String generateToken(String value, Long seconds) {
         String str = Jwts.builder()
                 .subject(value)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + milliSeconds))
+                .expiration(new Date(System.currentTimeMillis() + seconds * 1000))
                 .signWith(this.secretKey)
                 .compact();
         return str;
     }
 
-    public String generateToken(IMember member, Long milliSeconds) {
-        String str = Jwts.builder()
-                .subject(member.getSignId())
-                .claim("role", member.getRole())    // subject 외에 부가정보는 claim 에 추가할수 있다.
-                .claim("email", member.getEmail())  // jwt 에 부가정보 중 개인정보를 넣으면 위험하다.
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + milliSeconds))
-                .signWith(this.secretKey)
-                .compact();
-        return str;
-    }
+//    public String generateToken(IMember member, Long seconds) {
+//        String str = Jwts.builder()
+//                .subject(member.getSignId())
+//                .claim("role", member.getRole())    // subject 외에 부가정보는 claim 에 추가할수 있다.
+//                .claim("email", member.getEmail())  // jwt 에 부가정보 중 개인정보를 넣으면 위험하다.
+//                .issuedAt(new Date())
+//                .expiration(new Date(System.currentTimeMillis() + seconds * 1000))
+//                .signWith(this.secretKey)
+//                .compact();
+//        return str;
+//    }
 
     public Claims parseToken(String token) {
         try {
@@ -72,10 +75,8 @@ public class JwtUtils {
                     .parseSignedClaims(token)
                     .getPayload();
             return cl;
-        } catch (ExpiredJwtException | IllegalArgumentException e ) {
-            throw e;
-        } catch (JwtException e ) {
-            throw e;
+        } catch (ExpiredJwtException e) {
+            throw new JwtExpireException(e.getMessage());
         }
     }
 
